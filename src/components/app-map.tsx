@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from "react";
 import { Map3D, Map3DCameraProps } from "./map-3d";
-import { MapMouseEvent } from "@vis.gl/react-google-maps";
 
 const INITIAL_VIEW_PROPS = {
   center: {
@@ -22,13 +21,6 @@ export default function AppMap() {
   const handleCameraChange = useCallback((props: Map3DCameraProps) => {
     //  console.log("🚀 ~ handleCameraChange ~ props:", props);
     setViewProps((oldProps) => ({ ...oldProps, ...props }));
-  }, []);
-
-  const handleMapClick = useCallback((ev: MapMouseEvent) => {
-    if (!ev.detail.latLng) return;
-
-    const { lat, lng } = ev.detail.latLng;
-    setViewProps((p) => ({ ...p, center: { lat, lng, altitude: 0 } }));
   }, []);
 
   return (
